@@ -1,0 +1,7 @@
+{
+    "manifestFormat": "importmap|sofe",
+    "locations": {
+      "default": "import-map.json",
+      "dev": "import-map-dev.json"
+    }
+}

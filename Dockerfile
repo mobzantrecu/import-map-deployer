@@ -1,15 +1,7 @@
-FROM node:14-alpine as build
-WORKDIR /www
-COPY package.json yarn.lock ./
-RUN yarn install  --production --frozen-lockfile
-COPY . /www/
+FROM singlespa/import-map-deployer
 
-FROM node:14-alpine as release
-USER node
-ARG container_port=5000
-ENV PORT=$container_port
-ENV NODE_ENV=production
-EXPOSE $PORT
-WORKDIR /www
-COPY --from=build --chown=root:root /www /www
-CMD ["node", "src/web-server.js"]
+ENV HTTP_USERNAME= HTTP_PASSWORD=
+
+COPY config.json /www/
+
+CMD ["yarn", "start", "config.json"]
